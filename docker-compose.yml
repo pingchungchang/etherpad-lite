@@ -46,7 +46,27 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  typst_client:
+    build: ./typst_client
+    environment:
+      DB_HOST: postgres
+      DB_NAME: ${DOCKER_COMPOSE_POSTGRES_DATABASE:-etherpad}
+      DB_PASS: ${DOCKER_COMPOSE_POSTGRES_PASSWORD:-admin}
+      DB_PORT: ${DOCKER_COMPOSE_POSTGRES_PORT:-5432}
+      DB_TYPE: "postgres"
+      DB_USER: ${DOCKER_COMPOSE_POSTGRES_USER:-admin}
+    volumes:
+      - typ_dir:/data
+      - pdf_dir:/pdf
+    depends_on:
+      - postgres
+    ports:
+      - "${DOCKER_COMPOSE_PDF_PORT_PUBLISHED:-3939}:${DOCKER_COMPOSE_PDF_PORT_TARGET:-3939}"
+
+
 volumes:
   postgres_data:
   plugins:
   etherpad-var:
+  typ_dir:
+  pdf_dir:

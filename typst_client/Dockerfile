@@ -1,5 +1,6 @@
 FROM archlinux
 COPY . .
+RUN mkdir -p /typ && mkdir -p /pdf
 RUN pacman --noconfirm -Syu && \
   pacman --noconfirm -S typst iproute2 python3 nginx
 RUN python3 -m venv /venv && \

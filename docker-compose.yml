@@ -58,8 +58,10 @@ services:
     volumes:
       - typ_dir:/data
       - pdf_dir:/pdf
+      - ./APIKEY.txt:/APIKEY.txt
     depends_on:
       - postgres
+    restart: always
     ports:
       - "${DOCKER_COMPOSE_PDF_PORT_PUBLISHED:-3939}:${DOCKER_COMPOSE_PDF_PORT_TARGET:-3939}"
 

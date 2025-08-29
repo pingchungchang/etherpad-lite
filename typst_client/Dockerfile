@@ -2,7 +2,7 @@ FROM archlinux
 COPY . .
 RUN mkdir -p /typ && mkdir -p /pdf
 RUN pacman --noconfirm -Syu && \
-  pacman --noconfirm -S typst iproute2 python3 nginx
+  pacman --noconfirm -S typst iproute2 python3 nginx noto-fonts fontconfig noto-fonts-extra noto-fonts-cjk
 RUN python3 -m venv /venv && \
   . /venv/bin/activate && \
   pip install -r /src/requirements.txt && \
